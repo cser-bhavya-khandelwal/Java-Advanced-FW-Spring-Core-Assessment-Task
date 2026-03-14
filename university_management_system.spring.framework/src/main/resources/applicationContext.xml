@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- StudentProfile Bean -->
+    <bean id="studentProfile"
+          class="university_management_system.spring.framework.StudentProfile"/>
+
+    <!-- Course Bean -->
+    <bean id="course"
+          class="university_management_system.spring.framework.Course"/>
+
+    <!-- Department Bean -->
+    <!-- 1:M Relationship (Department → Courses) -->
+    <bean id="department"
+          class="university_management_system.spring.framework.Department">
+
+        <property name="courses">
+            <list>
+                <!-- courses will be added at runtime -->
+            </list>
+        </property>
+
+    </bean>
+
+    <!-- Student Bean -->
+    <bean id="student"
+          class="university_management_system.spring.framework.Student">
+
+        <!-- 1:1 Relationship -->
+        <property name="profile" ref="studentProfile"/>
+
+        <!-- M:1 Relationship -->
+        <property name="department" ref="department"/>
+
+        <!-- M:M Relationship -->
+        <property name="courses">
+            <set>
+                <!-- enrolled courses added at runtime -->
+            </set>
+        </property>
+
+    </bean>
+
+</beans>
